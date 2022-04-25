@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+{% for i in profile %}
+    <div class="row align-items-start">
+        <div class="col">
+        <div class="card m-3" style="width: 18rem;">
+          <img src="{{i.photo.url }}" class="card-img-top" alt="..." width="100">
+          <div class="card-body">
+            <h5 class="card-title">Name Surname</h5>
+            <p class="card-text">{{i.descr}}</p>
+            <a href="https://t-do.ru/Tatiana230126" class="btn btn-primary"><i class="fa-brands fa-telegram"></i> to telegram</a>
+          </div>
+        </div>
+            </div>
+         <div class="col">
+    <div class="card m-5">
+        <div class="card-header">
+            Обо мне
+        </div>
+
+      <div class="card-body">
+
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+      </div>
+    </div>
+      </div>
+     </div>
+    </div>
+{% endfor %}
+{% endblock %}
