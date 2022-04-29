@@ -16,6 +16,19 @@ class PortfolioPageView(ListView):
     template_name = 'portfolio.html'
     context_object_name = 'portfolio'
 
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            object_list = self.model.objects.filter(descr__icontains=query)
+        else:
+            object_list = self.model.objects.all()
+        return object_list
+
+class PortfolioDetailView(DetailView):
+    model = Portfolio
+    context_object_name = 'project'
+    template_name = 'detailproject.html'
+
 
 class BlogPageView(ListView):
     model = Blog
