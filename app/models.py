@@ -26,6 +26,8 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to='photos/')
     descr = models.TextField(max_length=50)
 
+    def __str__(self):
+        return self.descr
 
 class Portfolio(models.Model):
     DIFFICULT = [
@@ -43,11 +45,21 @@ class Portfolio(models.Model):
     difficult = models.CharField(max_length=1, choices=DIFFICULT,default='1',)
 
 
+    def __str__(self):
+        return self.descr
+
 class Comment(models.Model):
     project = models.ForeignKey(Portfolio, on_delete=models.CASCADE, default=None)
     text = models.TextField(max_length=50)
 
 
+    def __str__(self):
+        return self.text
+
+
 class Blog(models.Model):
-    name = models.TextField(max_length=50)
-    text = models.TextField(max_length=50)
+    name = models.CharField(max_length=50)
+    text = models.TextField(max_length=5000)
+
+    def __str__(self):
+        return self.name
