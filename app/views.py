@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+from django.views.generic import ListView, DetailView, CreateView
 
-from app.models import Profile, Portfolio, Blog
+from app.forms import RequestForm
+from app.models import Profile, Portfolio, Blog, Comment
 
 
 class MainPageView(ListView):
@@ -28,6 +30,18 @@ class PortfolioDetailView(DetailView):
     model = Portfolio
     context_object_name = 'project'
     template_name = 'detailproject.html'
+
+class CommentCreateView(CreateView):
+    model = Comment
+    form_class = RequestForm
+    template_name = 'comment.html'
+    success_url = '/'
+
+
+    def form_valid(self, form):
+        post = get_object_or_404(Portfolio, pk = self.kwargs ['pk'])
+        form.instance.post = Portfolio
+        return super().form_valid(form)
 
 
 class BlogPageView(ListView):
