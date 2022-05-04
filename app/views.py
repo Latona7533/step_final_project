@@ -26,10 +26,19 @@ class PortfolioPageView(ListView):
             object_list = self.model.objects.all()
         return object_list
 
+
 class PortfolioDetailView(DetailView):
     model = Portfolio
     context_object_name = 'project'
     template_name = 'detailproject.html'
+
+
+def project_detail(request, pk):
+    projects = get_object_or_404(Portfolio, id=pk)
+    comments = projects.comments.filter(active=True)
+    context = {'projects': projects, 'comments': comments}
+    return render(request, 'detailproject.html', context)
+
 
 class CommentCreateView(CreateView):
     model = Comment
@@ -37,10 +46,9 @@ class CommentCreateView(CreateView):
     template_name = 'comment.html'
     success_url = '/'
 
-
     def form_valid(self, form):
-        post = get_object_or_404(Portfolio, pk = self.kwargs ['pk'])
         form.instance.post = Portfolio
+        form.save()
         return super().form_valid(form)
 
 

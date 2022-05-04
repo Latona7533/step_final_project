@@ -49,8 +49,9 @@ class Portfolio(models.Model):
         return self.descr
 
 class Comment(models.Model):
-    project = models.ForeignKey(Portfolio, on_delete=models.CASCADE, default=None)
+    project = models.ForeignKey(Portfolio, on_delete=models.CASCADE, default=None, related_name='comments')
     text = models.TextField(max_length=50)
+    active = models.BooleanField(default=True)
 
 
     def __str__(self):

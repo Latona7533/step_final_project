@@ -2,14 +2,21 @@
 {% block content %}
 
 <div class="container">
-
+<h2 class="m-4">Проект:</h2>
     <div class="card m-5" style="width: 50rem;">
   <div class="card-body">
-      <p class="card-text">{{project.descr}}</p>
-    <p class="card-text"> {{project.link}}</p>
+      <p class="card-text">{{projects.descr}}</p>
+    <p class="card-text"> {{projects.link}}</p>
   </div>
 </div>
-
+<h2 class="m-4">Отзывы:</h2>
+     {% for i in comments %}
+         <div class="card m-4">
+          <div class="card-body">
+             {{i.text}}
+          </div>
+        </div>
+    {% endfor %}
 
 
 </div>
